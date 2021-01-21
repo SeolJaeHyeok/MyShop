@@ -19,6 +19,10 @@ class ProductItem extends StatelessWidget {
         child: Image.network(
           imageUrl,
           fit: BoxFit.cover,
+          errorBuilder:
+              (BuildContext context, Object exception, StackTrace stackTrace) {
+            return Text('Your error widget...');
+          },
         ),
         footer: GridTileBar(
           backgroundColor: Colors.black54,
