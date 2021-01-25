@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_shop_app/widgets/cart_item.dart';
+import './cart.dart';
+
 
 class OrderItem {
   final String id;
