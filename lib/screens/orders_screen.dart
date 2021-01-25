@@ -6,6 +6,7 @@ import '../providers/orders.dart' show Orders;
 
 class OrdersScreen extends StatelessWidget {
   static const routeName = '/orders';
+
   @override
   Widget build(BuildContext context) {
     final orderData = Provider.of<Orders>(context);
@@ -19,6 +20,16 @@ class OrdersScreen extends StatelessWidget {
         itemBuilder: (ctx, index) => OrderItem(
           orderData.orders[index],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+          ),
+        ),
+        onPressed: () {
+          Navigator.of(context).pushReplacementNamed('/');
+        },
       ),
     );
   }

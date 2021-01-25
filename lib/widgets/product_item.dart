@@ -5,7 +5,6 @@ import 'package:flutter_shop_app/screens/product_detail_screen.dart';
 import 'package:provider/provider.dart';
 
 class ProductItem extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final product = Provider.of<Product>(context, listen: false);
@@ -37,7 +36,8 @@ class ProductItem extends StatelessWidget {
           ),
           leading: Consumer<Product>(
             builder: (ctx, product, child) => IconButton(
-              icon: Icon(product.isFavorite ? Icons.favorite : Icons.favorite_border),
+              icon: Icon(
+                  product.isFavorite ? Icons.favorite : Icons.favorite_border),
               color: Theme.of(context).accentColor,
               iconSize: 20,
               onPressed: () {
@@ -51,6 +51,16 @@ class ProductItem extends StatelessWidget {
             iconSize: 20,
             onPressed: () {
               cart.addItem(product.id, product.price, product.title);
+              Scaffold.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Added Items to cart'),
+                  duration: Duration(seconds: 2),
+                  action: SnackBarAction(
+                    label: 'UNDO',
+                    onPressed: () {},
+                  ),
+                ),
+              );
             },
           ),
         ),
