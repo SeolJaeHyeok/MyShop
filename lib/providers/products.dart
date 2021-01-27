@@ -65,6 +65,7 @@ class Products with ChangeNotifier {
   // }
 
   void addProduct(Product product) {
+    //DUMMY_DATA => 추후 수정
     final newProduct = Product(
       id: DateTime.now().toString(),
       title: product.title,
