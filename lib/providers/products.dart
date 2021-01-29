@@ -91,6 +91,9 @@ class Products with ChangeNotifier {
       _items.add(newProduct);
       // _items.insert(0, newProduct) // List에 맨 처음에 추가
       notifyListeners();
+    }).catchError((error) {
+      print(error);
+      throw error;
     });
   }
 
