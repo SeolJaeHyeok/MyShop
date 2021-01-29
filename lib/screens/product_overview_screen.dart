@@ -20,22 +20,36 @@ class ProductOverviewScreen extends StatefulWidget {
 class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
   var _showFavoriteOnly = false;
   var _isLoading = false;
+  var _isInit = true;
 
   @override
   void initState() {
-    setState(() {
-      _isLoading = true;
-    });
-    Provider.of<Products>(context, listen: false)
-        .fetchAndSetProducts()
-        .then((_) {
-      setState(() {
-        _isLoading = false;
-      });
-    });
+    // setState(() {
+    //   _isLoading = true;
+    // });
+    // Provider.of<Products>(context, listen: false)
+    //     .fetchAndSetProducts()
+    //     .then((_) {
+    //   setState(() {
+    //     _isLoading = false;
+    //   });
+    // });
     super.initState();
   }
-
+  void didChangeDependencies() {
+    if (_isInit) {
+      setState(() {
+        _isLoading = true;
+      });
+      Provider.of<Products>(context).fetchAndSetProducts().then((_) {
+        setState(() {
+          _isLoading = false;
+        });
+      });
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
