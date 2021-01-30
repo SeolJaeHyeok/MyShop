@@ -21,16 +21,6 @@ class OrdersScreen extends StatelessWidget {
           orderData.orders[index],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-          ),
-        ),
-        onPressed: () {
-          Navigator.of(context).pushReplacementNamed('/');
-        },
-      ),
     );
   }
 }
