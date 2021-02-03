@@ -37,9 +37,13 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
       setState(() {
         _isLoading = true;
       });
-      Provider.of<Products>(context).fetchAndSetProducts().then((_) {
-        setState(() {
-          _isLoading = false;
+      Future.delayed(Duration(milliseconds: 500)).then((_) {
+        Provider.of<Products>(context, listen: false)
+            .fetchAndSetProducts()
+            .then((_) {
+          setState(() {
+            _isLoading = false;
+          });
         });
       });
     }
@@ -96,8 +100,8 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
       drawer: AppDrawer(),
       body: _isLoading
           ? Center(
-        child: CircularProgressIndicator(),
-      )
+              child: CircularProgressIndicator(),
+            )
           : ProductsGrid(_showOnlyFavorites),
     );
   }
