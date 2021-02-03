@@ -12,30 +12,25 @@ enum FilterOptions {
   All,
 }
 
-class ProductOverviewScreen extends StatefulWidget {
+class ProductsOverviewScreen extends StatefulWidget {
   @override
-  _ProductOverviewScreenState createState() => _ProductOverviewScreenState();
+  _ProductsOverviewScreenState createState() => _ProductsOverviewScreenState();
 }
 
-class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
-  var _showFavoriteOnly = false;
-  var _isLoading = false;
+class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
+  var _showOnlyFavorites = false;
   var _isInit = true;
+  var _isLoading = false;
 
   @override
   void initState() {
-    // setState(() {
-    //   _isLoading = true;
-    // });
-    // Provider.of<Products>(context, listen: false)
-    //     .fetchAndSetProducts()
-    //     .then((_) {
-    //   setState(() {
-    //     _isLoading = false;
-    //   });
+    // Provider.of<Products>(context).fetchAndSetProducts(); // WON'T WORK!
+    // Future.delayed(Duration.zero).then((_) {
+    //   Provider.of<Products>(context).fetchAndSetProducts();
     // });
     super.initState();
   }
+
   @override
   void didChangeDependencies() {
     if (_isInit) {
@@ -51,19 +46,20 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
     _isInit = false;
     super.didChangeDependencies();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Shop"),
-        actions: [
+        title: Text('MyShop'),
+        actions: <Widget>[
           PopupMenuButton(
             onSelected: (FilterOptions selectedValue) {
               setState(() {
                 if (selectedValue == FilterOptions.Favorites) {
-                  _showFavoriteOnly = true;
+                  _showOnlyFavorites = true;
                 } else {
-                  _showFavoriteOnly = false;
+                  _showOnlyFavorites = false;
                 }
               });
             },
@@ -72,11 +68,11 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
             ),
             itemBuilder: (_) => [
               PopupMenuItem(
-                child: Text("Only Favorites"),
+                child: Text('Only Favorites'),
                 value: FilterOptions.Favorites,
               ),
               PopupMenuItem(
-                child: Text("Show All"),
+                child: Text('Show All'),
                 value: FilterOptions.All,
               ),
             ],
@@ -87,20 +83,22 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
               value: cart.itemCount.toString(),
             ),
             child: IconButton(
-              icon: Icon(Icons.shopping_cart),
+              icon: Icon(
+                Icons.shopping_cart,
+              ),
               onPressed: () {
                 Navigator.of(context).pushNamed(CartScreen.routeName);
               },
             ),
-          )
+          ),
         ],
       ),
       drawer: AppDrawer(),
       body: _isLoading
           ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : ProductsGrid(_showFavoriteOnly),
+        child: CircularProgressIndicator(),
+      )
+          : ProductsGrid(_showOnlyFavorites),
     );
   }
 }

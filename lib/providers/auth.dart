@@ -60,7 +60,7 @@ class Auth with ChangeNotifier {
       notifyListeners();
       final prefs = await SharedPreferences.getInstance();
       final userData = json.encode({
-        'userid' : _userId,
+        'userId' : _userId,
         'token' : _token,
         'expiryDate' : _expiryDate.toIso8601String(),
       });
@@ -116,7 +116,7 @@ class Auth with ChangeNotifier {
     if(_authTimer != null) {
       _authTimer.cancel();
     }
-    final timeToExipiry = _expiryDate.difference(DateTime.now()).inSeconds;
-    _authTimer = Timer(Duration(seconds: timeToExipiry), logout);
+    final timeToExpiry = _expiryDate.difference(DateTime.now()).inSeconds;
+    _authTimer = Timer(Duration(seconds: timeToExpiry), logout);
   }
 }

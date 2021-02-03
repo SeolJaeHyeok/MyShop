@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shop_app/providers/auth.dart';
-import 'package:flutter_shop_app/providers/cart.dart';
-import 'package:flutter_shop_app/providers/product.dart';
-import 'package:flutter_shop_app/screens/product_detail_screen.dart';
 import 'package:provider/provider.dart';
+
+import '../screens/product_detail_screen.dart';
+import '../providers/product.dart';
+import '../providers/cart.dart';
+import '../providers/auth.dart';
 
 class ProductItem extends StatelessWidget {
   // final String id;
@@ -36,17 +37,17 @@ class ProductItem extends StatelessWidget {
           backgroundColor: Colors.black87,
           leading: Consumer<Product>(
             builder: (ctx, product, _) => IconButton(
-              icon: Icon(
-                product.isFavorite ? Icons.favorite : Icons.favorite_border,
-              ),
-              color: Theme.of(context).accentColor,
-              onPressed: () {
-                product.toggleFavoriteStatus(
-                  authData.token,
-                  authData.userId,
-                );
-              },
-            ),
+                  icon: Icon(
+                    product.isFavorite ? Icons.favorite : Icons.favorite_border,
+                  ),
+                  color: Theme.of(context).accentColor,
+                  onPressed: () {
+                    product.toggleFavoriteStatus(
+                      authData.token,
+                      authData.userId,
+                    );
+                  },
+                ),
           ),
           title: Text(
             product.title,
