@@ -36,6 +36,7 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
     // });
     super.initState();
   }
+  @override
   void didChangeDependencies() {
     if (_isInit) {
       setState(() {
