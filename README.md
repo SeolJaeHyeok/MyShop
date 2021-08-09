@@ -1,6 +1,6 @@
 # MyShop
 
-Shop Application using flutter
+Shop Application using flutter, firebase
 
 # Preview
 
